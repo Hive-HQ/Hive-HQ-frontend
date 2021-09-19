@@ -30,6 +30,7 @@ const Settings = () => {
   // Sort of sketch but shh
   const [updateCount, setUpdateCount] = React.useState(0);
   const [isFirstRender, setIsFirstRender] = React.useState(true);
+  const [isFirstOutRender, setIsFirstOutRender] = React.useState(true);
 
 
   const toastifySuccess = () => {
@@ -99,13 +100,18 @@ const Settings = () => {
     let temp = imageBoundingBoxCoords;
     let at = 0;
 
+    let rect = e.target.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+
     if (temp.x1 === undefined) {at = 0}
     else if (temp.x2 === undefined) {at = 1}
     else if (temp.x3 === undefined) {at = 2}
     else if (temp.x4 === undefined) {at = 3}
 
-    temp[`x${at + 1}`] = e.pageX - e.target.offsetLeft;
-    temp[`y${at + 1}`] = e.pageY - e.target.offsetTop;
+    temp[`x${at + 1}`] =  e.clientX - rect.left;
+    temp[`y${at + 1}`] = e.clientY - rect.top;
     setImageBoundingBoxCoords(temp);
     if (at === 3) {
       console.log("[INFO] Done getting coords");
@@ -143,12 +149,23 @@ const Settings = () => {
     document.getElementById(`cam-video-${BBCamID}`).addEventListener("click", handleUpdateCoords)
   }, [BBCamID]);
 
+  React.useEffect(() => {
+    if (isFirstOutRender) {
+      setIsFirstOutRender(false);
+      return;
+    }
+    console.log("[INFO] Out Set BBCamID to", BBCamID)
+    console.log("[INFO] Starting to capture clicks Out (React.useEffect)")
+    console.log("out el: ",document.getElementById(`cam-video-out-${BBCamID}`))
+    document.getElementById(`cam-video-out-${OutBBCamID}`).addEventListener("click", handleOutUpdateCoords)
+  }, [OutBBCamID]);
+
+
 
   const startUpdateOutCoords = cam => {
-    setBBCamID(cam);
+    setOutBBCamID(cam);
     console.log(cam);
     console.log("[INFO] Starting to out capture clicks");
-    // window.addEventListener("click", handleOutUpdateCoords);
     document.getElementById(`cam-video-${cam}`).addEventListener("click", handleOutUpdateCoords)
   }
 
@@ -211,7 +228,7 @@ const Settings = () => {
                 <button className="button-with-icon" onClick={() => startUpdateCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
               <Collapsible trigger="Floor Plan (click to open)" className="collapsible heading">
-                <img width="640" height="480" alt="Plotted floorplan" src={`${BASE_URL}/camera/${cam}/plot.mjpg`} />
+                <img width="640" height="480" alt="Plotted floorplan" src={`${BASE_URL}/camera/${cam}/plot.mjpg`} id={`cam-video-out-${cam}`} />
                 <button className="button-with-icon" onClick={() => startUpdateOutCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
             </div>
