@@ -206,11 +206,11 @@ const Settings = () => {
               <button className="button-with-icon" onClick={() => {removeCamera(cam) && setUpdateCount(updateCount + 1); toastifySuccess()}} >
                 <MdRemoveCircle className="icon" />Delete Camera
               </button>
-              <Collapsible trigger="Annotated Stream" className="collapsible heading">
+              <Collapsible trigger="Annotated Stream (click to open)" className="collapsible heading">
                 <img width="640" height="480" alt="Annotated stream" src={`${BASE_URL}/camera/${cam}/video.mjpg`} id={`cam-video-${cam}`} />
                 <button className="button-with-icon" onClick={() => startUpdateCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
-              <Collapsible trigger="Floor Plan" className="collapsible heading">
+              <Collapsible trigger="Floor Plan (click to open)" className="collapsible heading">
                 <img width="640" height="480" alt="Plotted floorplan" src={`${BASE_URL}/camera/${cam}/plot.mjpg`} />
                 <button className="button-with-icon" onClick={() => startUpdateOutCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
