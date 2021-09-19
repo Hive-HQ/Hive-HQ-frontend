@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Source+Sans+Pro&display=swap");
+
+a {
+  color: white;
+  font-family: "Poppins";
+  text-decoration: none;
+}
+
+hr {
+  margin: 10px;
+  border-radius: 1px;
+  border: 1px solid #66aad0;
+  background-color: #66aad0;
+}
+
+img {
+  margin: 10px;
+}
+
+p {
+  font-family: "Source Sans Pro";
+  margin: 10px;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 250px;
+  background-color: #125479;
+}
+
+.icon {
+  color: white;
+  margin: 0 10px;
+  position: relative;
+  top: 2px;
+}
+
+.links {
+  margin-top: 80px;
+  padding: 0px;
+}
+
+.link {
+  list-style-type: none;
+  padding: 12px;
+}
+
+.link:hover {
+  background-color: #66aad0;
+}
+
+.link.active {
+  background-color: #66aad0;
+  font-weight: 600;
+}
+
+.divider {
+  margin: 10px;
+}
+
+.heading {
+  margin-top: 0px;
+  font-family: Poppins;
+  color: #125479;
+  margin: 0 10px 10px;
+  padding-top: 10px;
+}
+
+.content {
+  margin-left: 260px;
+}
+
+.icon-button {
+  border: none;
+  border-radius: 999px;
+  background-color: #125479;
+  color: white;
+  margin: 10px;
+  height: 32px;
+  width: 32px;
+  display: block;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
+
+.refresh-stats {
+  display: inline-block;
+  position: relative;
+  top: -6px;
+}
+
+.infocard {
+  display: inline-block;
+  background: #125479;
+  border: 5px solid #66aad0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  width: 264px;
+  height: 200px;
+  margin: 0 10px 10px;
+}
+
+.infocard-label {
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  color: #66aad0;
+  text-align: center;
+  line-height: 70px;
+}
+
+.infocard-stat {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 96px;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+  position: relative;
+}
+
+.button-with-icon {
+  position: relative;
+  height: 50px;
+  background-color: #125479;
+  border: 2px solid #66aad0;
+  border-radius: 50px;
+  color: white;
+  margin: 10px;
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  padding-right: 20px;
+}
+
+.button-with-icon:hover {
+  cursor: pointer;
+}
+
+form label {
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  margin: 10px;
+}
+
+form input {
+  border: 2px solid #66aad0;
+  border-radius: 2px;
+  font-family: "Source Sans Pro";
+  margin: 10px;
+  font-size: 18px;
+}
+
+form button {
+  border: 1px solid #66aad0;
+  border-radius: 100px;
+  background-color: #66aad0;
+  color: white;
+  margin: 10px;
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.modal {
+  background-color: lightblue;
+}
+.modal > .heading {
+  width: 100%;
+  border-bottom: 2px solid #66aad0;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #125479;
+  border-radius: 18px;
+  border: 1px solid #66aad0;
+  color: white;
+}
+
+@keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+  }
+}
+.popup-content {
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
