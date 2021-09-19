@@ -16,17 +16,16 @@ function App() {
           <img className="logo" alt="logo" src={Logo} />
           <ul className="links">
             <a href="/"><li className={activeClass("/")}><MdDashboard className="icon" />Dashboard</li></a>
-            <a href="/analytics"><li className={activeClass("/analytics")}><MdInsertChart className="icon" />Analytics</li></a>
-            <a href="/liveview"><li className={activeClass("/liveview")}><MdVideocam className="icon" />Live View</li></a>
+            <a href="/analytics" className="inactive"><li className={activeClass("/analytics")}><MdInsertChart className="icon" />Analytics</li></a>
+            <a href="/liveview" className="inactive"><li className={activeClass("/liveview")}><MdVideocam className="icon" />Live View</li></a>
             <a href="/cameras"><li className={activeClass("/cameras")}><MdPhotoCamera className="icon" />Cameras</li></a>
             <hr />
-            <a href="/profile"><li className={activeClass("/profile")}><MdAccountCircle className="icon" />Profile</li></a>
+            <a href="/profile" className="inactive"><li className={activeClass("/profile")}><MdAccountCircle className="icon" />Profile</li></a>
           </ul>
         </div>
         <div className="content">
             <Switch>
               <Route path="/" component={Dashboard} exact />
-              <Route path="/analytics" component={Analytics} />
               <Route path="/cameras" component={Cameras} />
             </Switch>
         </div>

@@ -29,6 +29,11 @@ p {
   background-color: #125479;
 }
 
+.inactive {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .logo {
   width: 220px;
   margin: 0;
