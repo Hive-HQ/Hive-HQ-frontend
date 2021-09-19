@@ -10,6 +10,7 @@ const Settings = () => {
   const [addCameraURL, setAddCameraURL] = React.useState("");
   const [coordinate, setCoordinate] = React.useState({ x: null, y: null });
   const [BBCamID, setBBCamID] = React.useState(999);
+  const [OutBBCamID, setOutBBCamID] = React.useState(999);
   const [imageBoundingBoxCoords, setImageBoundingBoxCoords] = React.useState({
     x0_pls_ignore: undefined,
     x1: undefined,
@@ -44,22 +45,35 @@ const Settings = () => {
     });
   };
 
+  const toastifyFailure = () => {
+    toast.error("Error!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      transition: Slide,
+    });
+  };
+
   const handleUpdateCoords = (e) => {
     let temp = imageBoundingBoxCoords;
     let at = 0;
     console.log("in handleUpdateCoords BBCamId set to:", BBCamID)
+
+    let rect = e.target.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
 
     if (temp.x1 === undefined) {at = 0}
     else if (temp.x2 === undefined) {at = 1}
     else if (temp.x3 === undefined) {at = 2}
     else if (temp.x4 === undefined) {at = 3}
 
-    temp[`x${at + 1}`] = e.pageX - e.target.offsetLeft;
-    temp[`y${at + 1}`] = e.pageY - e.target.offsetTop;
-
-    console.log(e.pageX - e.target.offsetLeft)
-    console.log(e.pageY - e.target.offsetTop)
-
+    temp[`x${at + 1}`] =  e.clientX - rect.left;
+    temp[`y${at + 1}`] = e.clientY - rect.top;
     setImageBoundingBoxCoords(temp);
     if (at === 3) {
       console.log("[INFO] Done getting coords");
@@ -95,7 +109,7 @@ const Settings = () => {
     setImageBoundingBoxCoords(temp);
     if (at === 3) {
       console.log("[INFO] Done getting coords");
-      setOutBoundingBoxes(BBCamID, temp);
+      setOutBoundingBoxes(OutBBCamID, temp);
       window.removeEventListener("click", handleOutUpdateCoords);
       setImageBoundingBoxCoords({
         x0_pls_ignore: undefined,
@@ -115,6 +129,7 @@ const Settings = () => {
 
   const startUpdateCoords = async (cam) => {
     setBBCamID(cam);
+    console.log("[INFO] startUpdateCoords called")
   }
 
   React.useEffect(() => {
@@ -123,8 +138,9 @@ const Settings = () => {
       return;
     }
     console.log("[INFO] Set BBCamID to", BBCamID)
-    console.log("[INFO] Starting to capture clicks")
-    window.addEventListener("click", handleUpdateCoords);
+    console.log("[INFO] Starting to capture clicks (React.useEffect)")
+    console.log("el: ",document.getElementById(`cam-video-${BBCamID}`))
+    document.getElementById(`cam-video-${BBCamID}`).addEventListener("click", handleUpdateCoords)
   }, [BBCamID]);
 
 
@@ -132,7 +148,8 @@ const Settings = () => {
     setBBCamID(cam);
     console.log(cam);
     console.log("[INFO] Starting to out capture clicks");
-    window.addEventListener("click", handleOutUpdateCoords);
+    // window.addEventListener("click", handleOutUpdateCoords);
+    document.getElementById(`cam-video-${cam}`).addEventListener("click", handleOutUpdateCoords)
   }
 
   const handleAddChange = e => {
@@ -146,17 +163,10 @@ const Settings = () => {
     toastifySuccess();
   };
 
-
-
-  const updateCoordinate = e => {
-    e.preventDefault();
-    setCoordinate({ x: e.pageX - e.target.offsetLeft, y: e.pageY - e.target.offsetTop });
-  };
-
-  React.useEffect(() => {
-    window.addEventListener("mousemove", updateCoordinate);
-    return () => window.removeEventListener("mousemove", updateCoordinate);
-  });
+  // React.useEffect(() => {
+  //   window.addEventListener("mousemove", updateCoordinate);
+  //   return () => window.removeEventListener("mousemove", updateCoordinate);
+  // });
 
   React.useEffect(() => {
     async function fetchData() {
@@ -170,8 +180,8 @@ const Settings = () => {
 
   return(
     <div className="settings">
-      <h1 className="heading">Settings</h1>
-      <h2 className="heading">Add Cameras</h2>
+      <h1 className="heading">Cameras</h1>
+      <h2 className="heading">Add a Camera</h2>
 
       <Popup modal trigger={<button className="button-with-icon"><MdAddCircle className="icon" />Add Camera</button>} className="settings-popup">
         {close => (
@@ -196,13 +206,13 @@ const Settings = () => {
               <button className="button-with-icon" onClick={() => {removeCamera(cam) && setUpdateCount(updateCount + 1); toastifySuccess()}} >
                 <MdRemoveCircle className="icon" />Delete Camera
               </button>
-              <Collapsible trigger="Annotated Stream (Click to Open)" className="collapsible heading">
-                <img width="640" height="480" alt="Annotated stream" src={`${BASE_URL}/camera/${cam}/video.mjpg`} />
-                <button className="button-with-icon edit" onClick={() => startUpdateCoords(cam)}><MdEdit className="icon" />Edit</button>
+              <Collapsible trigger="Annotated Stream" className="collapsible heading">
+                <img width="640" height="480" alt="Annotated stream" src={`${BASE_URL}/camera/${cam}/video.mjpg`} id={`cam-video-${cam}`} />
+                <button className="button-with-icon" onClick={() => startUpdateCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
-              <Collapsible trigger="Floor Plan (Click to Open)" className="collapsible heading">
+              <Collapsible trigger="Floor Plan" className="collapsible heading">
                 <img width="640" height="480" alt="Plotted floorplan" src={`${BASE_URL}/camera/${cam}/plot.mjpg`} />
-                <button className="button-with-icon edit" onClick={() => startUpdateOutCoords(cam)}><MdEdit className="icon" />Edit</button>
+                <button className="button-with-icon" onClick={() => startUpdateOutCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
             </div>
           )

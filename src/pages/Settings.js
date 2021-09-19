@@ -134,7 +134,7 @@ const Settings = () => {
     }
     console.log("[INFO] Set BBCamID to", BBCamID)
     console.log("[INFO] Starting to capture clicks")
-    window.addEventListener("click", handleUpdateCoords);
+    document.getElementById(`cam-video-${cam}`).addEventListener("click", handleOutUpdateCoords)
   }, [BBCamID]);
 
 
@@ -142,7 +142,8 @@ const Settings = () => {
     setBBCamID(cam);
     console.log(cam);
     console.log("[INFO] Starting to out capture clicks");
-    window.addEventListener("click", handleOutUpdateCoords);
+    // window.addEventListener("click", handleOutUpdateCoords);
+    document.getElementById(`cam-video-${cam}`).addEventListener("click", handleOutUpdateCoords)
   }
 
   const handleAddChange = e => {
@@ -160,7 +161,14 @@ const Settings = () => {
 
   const updateCoordinate = e => {
     e.preventDefault();
-    setCoordinate({ x: e.pageX - e.target.offsetLeft, y: e.pageY - e.target.offsetTop });
+     rect = e.target.getBoundingClientRect();
+     x = e.clientX - rect.left;
+     y = e.clientY - rect.top;
+    console.log(x, y, e.clientX, e.clientY, rect.left, rect.top)
+    setCoordinate({ 
+      x,
+      y
+     });
   };
 
   React.useEffect(() => {
@@ -180,8 +188,8 @@ const Settings = () => {
 
   return(
     <div className="settings">
-      <h1 className="heading">Settings</h1>
-      <h2 className="heading">Add Cameras</h2>
+      <h1 className="heading">Cameras</h1>
+      <h2 className="heading">Add a Camera</h2>
 
       <Popup modal trigger={<button className="button-with-icon"><MdAddCircle className="icon" />Add Camera</button>} className="settings-popup">
         {close => (
@@ -203,7 +211,7 @@ const Settings = () => {
         {cameras.map(function(cam) {
           return (
             <div key={cam} className="camera-item heading">{`Camera #${cam}`}: 
-              <button className="button-with-icon" onClick={() => {removeCamera(cam) && setUpdateCount(updateCount + 1); toastifySuccess()}} >
+              <button className="button-with-icon" id={`cam-video-${cam}`} onClick={() => {removeCamera(cam) && setUpdateCount(updateCount + 1); toastifySuccess()}} >
                 <MdRemoveCircle className="icon" />Delete Camera
               </button>
               <Collapsible trigger="Annotated Stream" className="collapsible heading">
