@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { MdDashboard, MdInsertChart, MdVideocam, MdPhotoCamera, MdAccountCircle } from "react-icons/md";
 import Dashboard from "./pages/Dashboard.js";
-import Analytics from "./pages/Analytics.js";
+// import Analytics from "./pages/Analytics.js";
 import Cameras from "./pages/Cameras.js";
 import Logo from "./Hive-HQ_Logo.png";
 
