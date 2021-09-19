@@ -16,11 +16,15 @@ function App() {
           <img className="logo" alt="logo" src={Logo} />
           <ul className="links">
             <a href="/"><li className={activeClass("/")}><MdDashboard className="icon" />Dashboard</li></a>
-            <a href="/analytics" className="inactive"><li className={activeClass("/analytics")}><MdInsertChart className="icon" />Analytics</li></a>
-            <a href="/liveview" className="inactive"><li className={activeClass("/liveview")}><MdVideocam className="icon" />Live View</li></a>
+            <div className="inactive-wrapper">
+              <a href="/analytics" className="inactive"><li className={activeClass("/analytics")}><MdInsertChart className="icon" />Analytics</li></a>
+              <a href="/liveview" className="inactive"><li className={activeClass("/liveview")}><MdVideocam className="icon" />Live View</li></a>
+            </div>
             <a href="/cameras"><li className={activeClass("/cameras")}><MdPhotoCamera className="icon" />Cameras</li></a>
             <hr />
-            <a href="/profile" className="inactive"><li className={activeClass("/profile")}><MdAccountCircle className="icon" />Profile</li></a>
+            <div className="inactive-wrapper">
+              <a href="/profile" className="inactive"><li className={activeClass("/profile")}><MdAccountCircle className="icon" />Profile</li></a>
+            </div>
           </ul>
         </div>
         <div className="content">

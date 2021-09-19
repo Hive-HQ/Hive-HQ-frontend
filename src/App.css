@@ -30,8 +30,11 @@ p {
 }
 
 .inactive {
-  cursor: not-allowed;
   pointer-events: none;
+}
+
+.inactive-wrapper {
+  cursor: not-allowed;
 }
 
 .logo {
