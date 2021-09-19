@@ -46,19 +46,6 @@ const Settings = () => {
     });
   };
 
-  const toastifyFailure = () => {
-    toast.error("Error!", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      transition: Slide,
-    });
-  };
-
   const handleUpdateCoords = (e) => {
     let temp = imageBoundingBoxCoords;
     let at = 0;
