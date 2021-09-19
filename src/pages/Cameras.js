@@ -10,7 +10,6 @@ const Settings = () => {
   const [addCameraURL, setAddCameraURL] = React.useState("");
   const [coordinate, setCoordinate] = React.useState({ x: null, y: null });
   const [BBCamID, setBBCamID] = React.useState(999);
-  const [OutBBCamID, setOutBBCamID] = React.useState(999);
   const [imageBoundingBoxCoords, setImageBoundingBoxCoords] = React.useState({
     x0_pls_ignore: undefined,
     x1: undefined,
@@ -45,19 +44,6 @@ const Settings = () => {
     });
   };
 
-  const toastifyFailure = () => {
-    toast.error("Error!", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      transition: Slide,
-    });
-  };
-
   const handleUpdateCoords = (e) => {
     let temp = imageBoundingBoxCoords;
     let at = 0;
@@ -70,6 +56,10 @@ const Settings = () => {
 
     temp[`x${at + 1}`] = e.pageX - e.target.offsetLeft;
     temp[`y${at + 1}`] = e.pageY - e.target.offsetTop;
+
+    console.log(e.pageX - e.target.offsetLeft)
+    console.log(e.pageY - e.target.offsetTop)
+
     setImageBoundingBoxCoords(temp);
     if (at === 3) {
       console.log("[INFO] Done getting coords");
@@ -105,7 +95,7 @@ const Settings = () => {
     setImageBoundingBoxCoords(temp);
     if (at === 3) {
       console.log("[INFO] Done getting coords");
-      setOutBoundingBoxes(OutBBCamID, temp);
+      setOutBoundingBoxes(BBCamID, temp);
       window.removeEventListener("click", handleOutUpdateCoords);
       setImageBoundingBoxCoords({
         x0_pls_ignore: undefined,
@@ -206,13 +196,13 @@ const Settings = () => {
               <button className="button-with-icon" onClick={() => {removeCamera(cam) && setUpdateCount(updateCount + 1); toastifySuccess()}} >
                 <MdRemoveCircle className="icon" />Delete Camera
               </button>
-              <Collapsible trigger="Annotated Stream" className="collapsible heading">
+              <Collapsible trigger="Annotated Stream (Click to Open)" className="collapsible heading">
                 <img width="640" height="480" alt="Annotated stream" src={`${BASE_URL}/camera/${cam}/video.mjpg`} />
-                <button className="button-with-icon" onClick={() => startUpdateCoords(cam)}><MdEdit className="icon" />Edit</button>
+                <button className="button-with-icon edit" onClick={() => startUpdateCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
-              <Collapsible trigger="Floor Plan" className="collapsible heading">
+              <Collapsible trigger="Floor Plan (Click to Open)" className="collapsible heading">
                 <img width="640" height="480" alt="Plotted floorplan" src={`${BASE_URL}/camera/${cam}/plot.mjpg`} />
-                <button className="button-with-icon" onClick={() => startUpdateOutCoords(cam)}><MdEdit className="icon" />Edit</button>
+                <button className="button-with-icon edit" onClick={() => startUpdateOutCoords(cam)}><MdEdit className="icon" />Edit</button>
               </Collapsible>
             </div>
           )

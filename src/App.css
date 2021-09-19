@@ -29,6 +29,12 @@ p {
   background-color: #125479;
 }
 
+.logo {
+  width: 220px;
+  margin: 0;
+  padding-left: 15px;
+}
+
 .icon {
   color: white;
   margin: 0 10px;
@@ -37,7 +43,6 @@ p {
 }
 
 .links {
-  margin-top: 80px;
   padding: 0px;
 }
 
@@ -77,9 +82,9 @@ p {
   background-color: #125479;
   color: white;
   margin: 10px;
+  padding-top: 5px;
   height: 32px;
   width: 32px;
-  display: block;
 }
 
 .icon-button:hover {
@@ -90,6 +95,11 @@ p {
   display: inline-block;
   position: relative;
   top: -6px;
+}
+
+.camera-item {
+  position: relative;
+  left: -40px;
 }
 
 .infocard {
@@ -164,6 +174,17 @@ form button {
   cursor: pointer;
 }
 
+.collapsible {
+  cursor: pointer;
+  position: relative;
+  left: -10px;
+}
+
+.edit {
+  position: relative;
+  top: -30px;
+}
+
 .modal {
   background-color: lightblue;
 }
@@ -217,4 +238,9 @@ form button {
 }
 .popup-content {
   -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+  animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.Collapsible_trigger {
+  background-color: #66aad0;
 }

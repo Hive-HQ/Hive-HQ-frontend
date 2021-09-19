@@ -1,9 +1,10 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { MdDashboard, MdInsertChart, MdVideocam, MdSettings, MdAccountCircle } from "react-icons/md";
+import { MdDashboard, MdInsertChart, MdVideocam, MdPhotoCamera, MdAccountCircle } from "react-icons/md";
 import Dashboard from "./pages/Dashboard.js";
 import Analytics from "./pages/Analytics.js";
-import Settings from "./pages/Settings.js";
+import Cameras from "./pages/Cameras.js";
+import Logo from "./Hive-HQ_Logo.png";
 
 function App() {
   const activeClass = (route) => { return window.location.pathname === route ? "link active" : "link" };
@@ -12,12 +13,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className="sidebar">
+          <img className="logo" alt="logo" src={Logo} />
           <ul className="links">
             <a href="/"><li className={activeClass("/")}><MdDashboard className="icon" />Dashboard</li></a>
             <a href="/analytics"><li className={activeClass("/analytics")}><MdInsertChart className="icon" />Analytics</li></a>
-            <hr />
             <a href="/liveview"><li className={activeClass("/liveview")}><MdVideocam className="icon" />Live View</li></a>
-            <a href="/settings"><li className={activeClass("/settings")}><MdSettings className="icon" />Settings</li></a>
+            <a href="/cameras"><li className={activeClass("/cameras")}><MdPhotoCamera className="icon" />Cameras</li></a>
+            <hr />
             <a href="/profile"><li className={activeClass("/profile")}><MdAccountCircle className="icon" />Profile</li></a>
           </ul>
         </div>
@@ -25,7 +27,7 @@ function App() {
             <Switch>
               <Route path="/" component={Dashboard} exact />
               <Route path="/analytics" component={Analytics} />
-              <Route path="/settings" component={Settings} />
+              <Route path="/cameras" component={Cameras} />
             </Switch>
         </div>
       </BrowserRouter>

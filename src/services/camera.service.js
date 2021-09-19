@@ -1,6 +1,6 @@
 const axios =  require("axios");
 
-const BASE_URL = "http://34.139.178.241:5500";
+export const BASE_URL = "http://34.139.178.241:5500";
 
 /**
  * Asks the server to create an AI thread for a camera
@@ -33,12 +33,14 @@ export async function addCamera(ip) {
  *  deleted: bool -> whether or not it succesed
  */
  export async function removeCamera(id) {
-    const res = await axios.post(BASE_URL + "/camera/" + id + "/stop")
+    const res = await axios.get(BASE_URL + "/camera/" + id + "/stop")
 
-    if (res.statusCode === 200) {
+    if (res.status === 200) {
+        console.log("[INFO] Stopped camera with id", id)
         return true;
     } else {
-        return Promise.reject(`Error removing camera: ${res}`);
+        console.log("[ERROR] Error removing camera:", res)
+        return Promise.reject(`Error removing camera`);
     }
 }
 
@@ -48,11 +50,42 @@ export async function addCamera(ip) {
  */
 export async function getCameras() {
     const res = await axios.get(BASE_URL + "/get_cameras/")
-    console.log(res)
-    console.log(res.data)
-    if (res.statusCode === 200) {
+    if (res.status === 200) {
+        console.log("[INFO] Got camera ids:", res.data)
         return res.data;
     } else {
-        return Promise.reject(`Error removing camera: ${res}`);
+        return Promise.reject("Error removing camera");
+    }
+}
+
+/**
+ * Set BB for camera
+ * TODO
+ */
+ export async function setBoundingBoxes(id, box) {
+    const res = await axios.post(BASE_URL + "/camera/" + id + "/set_in_bounds", {
+        ...box
+    })
+    if (res.status === 200) {
+        console.log("[INFO] Set bounding box")
+        return true;
+    } else {
+        return Promise.reject("Error setting bounding box");
+    }
+}
+
+/**
+ * Set BB out for camera
+ * TODO
+ */
+ export async function setOutBoundingBoxes(id, box) {
+    const res = await axios.post(BASE_URL + "/camera/" + id + "/set_out_bounds", {
+        ...box
+    })
+    if (res.status === 200) {
+        console.log("[INFO] Set bounding box")
+        return true;
+    } else {
+        return Promise.reject("Error setting bounding box");
     }
 }
