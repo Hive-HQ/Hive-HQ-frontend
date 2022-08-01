@@ -61,7 +61,7 @@ export async function getCameras() {
     }
     */
    // ****************************************************
-    return [config.camera_id]
+    return config.camera_ids
 }
 
 /**

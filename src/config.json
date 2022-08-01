@@ -1,4 +1,4 @@
 {
     "server_url": "http://xxx.xxx.xxx.xxx:5500",
-    "camera_id": "xxx"
+    "camera_ids": ["xxx"]
 }
