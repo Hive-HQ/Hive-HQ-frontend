@@ -1,16 +1,15 @@
 import React from "react";
-import { MdAddCircle, MdRemoveCircle, MdClose, MdEdit } from "react-icons/md";
+import { MdAddCircle, MdClose } from "react-icons/md";
 import Popup from "reactjs-popup";
 import Collapsible from 'react-collapsible';
-import { addCamera, removeCamera, getCameras, setBoundingBoxes, setOutBoundingBoxes, BASE_URL } from "../services/camera.service.js";
+import { addCamera, getCameras, setBoundingBoxes, setOutBoundingBoxes, BASE_URL } from "../services/camera.service.js";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const Settings = () => {
   const [addCameraURL, setAddCameraURL] = React.useState("");
-  const [coordinate, setCoordinate] = React.useState({ x: null, y: null });
-  const [BBCamID, setBBCamID] = React.useState(999);
-  const [OutBBCamID, setOutBBCamID] = React.useState(999);
+  const [BBCamID, ] = React.useState(999);
+  const [OutBBCamID, ] = React.useState(999);
   const [imageBoundingBoxCoords, setImageBoundingBoxCoords] = React.useState({
     x0_pls_ignore: undefined,
     x1: undefined,
@@ -52,8 +51,6 @@ const Settings = () => {
     console.log("in handleUpdateCoords BBCamId set to:", BBCamID)
 
     let rect = e.target.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
 
     if (temp.x1 === undefined) {at = 0}
     else if (temp.x2 === undefined) {at = 1}
@@ -88,8 +85,6 @@ const Settings = () => {
     let at = 0;
 
     let rect = e.target.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
 
 
     if (temp.x1 === undefined) {at = 0}
@@ -120,10 +115,10 @@ const Settings = () => {
     }
   }
 
-  const startUpdateCoords = async (cam) => {
-    setBBCamID(cam);
-    console.log("[INFO] startUpdateCoords called")
-  }
+  // const startUpdateCoords = async (cam) => {
+  //   setBBCamID(cam);
+  //   console.log("[INFO] startUpdateCoords called")
+  // }
 
   React.useEffect(() => {
     if (isFirstRender) {
@@ -134,6 +129,7 @@ const Settings = () => {
     console.log("[INFO] Starting to capture clicks (React.useEffect)")
     console.log("el: ",document.getElementById(`cam-video-${BBCamID}`))
     document.getElementById(`cam-video-${BBCamID}`).addEventListener("click", handleUpdateCoords)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [BBCamID]);
 
   React.useEffect(() => {
@@ -145,16 +141,17 @@ const Settings = () => {
     console.log("[INFO] Starting to capture clicks Out (React.useEffect)")
     console.log("out el: ",document.getElementById(`cam-video-out-${BBCamID}`))
     document.getElementById(`cam-video-out-${OutBBCamID}`).addEventListener("click", handleOutUpdateCoords)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [OutBBCamID]);
 
 
 
-  const startUpdateOutCoords = cam => {
-    setOutBBCamID(cam);
-    console.log(cam);
-    console.log("[INFO] Starting to out capture clicks");
-    document.getElementById(`cam-video-${cam}`).addEventListener("click", handleOutUpdateCoords)
-  }
+  // const startUpdateOutCoords = cam => {
+  //   setOutBBCamID(cam);
+  //   console.log(cam);
+  //   console.log("[INFO] Starting to out capture clicks");
+  //   document.getElementById(`cam-video-${cam}`).addEventListener("click", handleOutUpdateCoords)
+  // }
 
   const handleAddChange = e => {
     setAddCameraURL(e.target.value);
