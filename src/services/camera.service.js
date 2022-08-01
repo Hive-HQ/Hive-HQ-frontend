@@ -1,6 +1,7 @@
+import config from "../config";
 const axios =  require("axios");
 
-export const BASE_URL = "http://34.139.178.241:5500";
+export const BASE_URL = config.server_url;
 
 /**
  * Asks the server to create an AI thread for a camera
@@ -49,6 +50,8 @@ export async function addCamera(ip) {
  * TODO
  */
 export async function getCameras() {
+    // ****************************************************
+    /*
     const res = await axios.get(BASE_URL + "/get_cameras/")
     if (res.status === 200) {
         console.log("[INFO] Got camera ids:", res.data)
@@ -56,6 +59,9 @@ export async function getCameras() {
     } else {
         return Promise.reject("Error removing camera");
     }
+    */
+   // ****************************************************
+    return [config.camera_id]
 }
 
 /**
