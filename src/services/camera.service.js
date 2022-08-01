@@ -50,8 +50,6 @@ export async function addCamera(ip) {
  * TODO
  */
 export async function getCameras() {
-    // ****************************************************
-    /*
     const res = await axios.get(BASE_URL + "/get_cameras/")
     if (res.status === 200) {
         console.log("[INFO] Got camera ids:", res.data)
@@ -59,9 +57,6 @@ export async function getCameras() {
     } else {
         return Promise.reject("Error removing camera");
     }
-    */
-   // ****************************************************
-    return config.camera_ids
 }
 
 /**
