@@ -24,7 +24,7 @@ function App() {
             <hr />
             <div className="inactive-wrapper">
               <a href="/profile" className="inactive"><li className={activeClass("/profile")}><MdAccountCircle className="icon" />Profile</li></a>
-              <li><p className='disclaimer'>Please note this is the HiveHQ Public Live Demo, some features are disabled.</p></li>
+              <li><p className='disclaimer'>Please note this is the Hive-HQ Public Live Demo, some features are disabled.</p></li>
             </div>
           </ul>
         </div>

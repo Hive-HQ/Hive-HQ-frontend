@@ -96,7 +96,7 @@ p {
 }
 
 .icon-button:hover {
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .refresh-stats {
