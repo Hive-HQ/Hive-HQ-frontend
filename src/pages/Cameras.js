@@ -184,7 +184,7 @@ const Settings = () => {
       <h1 className="heading">Cameras</h1>
       <h2 className="heading">Add a Camera</h2>
 
-      <Popup modal trigger={<button className="button-with-icon"><MdAddCircle className="icon" />Add Camera</button>} className="settings-popup">
+      <Popup modal trigger={<button className="button-with-icon" disabled><MdAddCircle className="icon" />Add Camera</button>} className="settings-popup">
         {close => (
           <div className="modal">
             <button className="close" onClick={close}><MdClose /></button>

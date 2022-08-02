@@ -252,3 +252,13 @@ form button {
 .Collapsible_trigger {
   background-color: #66aad0;
 }
+
+/*************************/
+.disclaimer {
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  margin: 10px;
+  color: #eee;
+  bottom: 0px;
+  position: absolute;
+}
