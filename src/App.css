@@ -262,3 +262,7 @@ form button {
   bottom: 0px;
   position: absolute;
 }
+
+.disabled {
+  cursor: not-allowed !important;
+}
